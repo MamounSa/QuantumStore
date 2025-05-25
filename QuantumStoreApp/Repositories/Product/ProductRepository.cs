@@ -18,6 +18,12 @@ namespace QuantumStore
             return _context.Products.Include(x=>x.ProductCategory).ToList();
         }
 
+
+	public IEnumerable<Product> GetAllProductsByExpirationDate(DateTime  dateTime)
+	 {
+     return _context.Products.Include(x => x.ProductCategory).Where(x=>x.ExpirationDate==dateTime).ToList();
+ 	}
+
         public Product GetProductById(int id)
         {
             var product = _context.Products.Include(p=>p.ProductCategory).FirstOrDefault(p => p.Id == id);
