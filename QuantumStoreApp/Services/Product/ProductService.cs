@@ -64,7 +64,16 @@ namespace QuantumStore
                 return false; // فشل الإضافة بسبب خطأ
             }
         }
+		public IEnumerable<ProductDTO> GetAllProductsByExpirationDate(DateTime  dateTime)
+  			{
+            var products = _productRepository.GetAllProductsByExpirationDate();
+            if (products == null)
+            {
+                return Enumerable.Empty<ProductDTO>();
+            }
 
+            return products.Select(x=>_mapper.Map<ProductDTO>(x));
+            }
         // تحديث منتج موجود
         public bool UpdateProduct(ProductDTO productDTO)
         {
@@ -135,5 +144,6 @@ namespace QuantumStore
 
             return true; // البيانات صحيحة
         }
+		
     }
 }
