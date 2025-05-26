@@ -22,6 +22,11 @@ public class OrderRepository : IOrderRepository
             .Include(o => o.Payment)
             .ToList();*/
     }
+    public IEnumerable<Order> GetAllOrdersOrderDate(Datetime  datetime)
+{
+    return _context.Orders.Include(o => o.Customer).where(x=>x.OrderDate== datetime).ToList();
+   
+}
 
     public Order GetOrderById(int id)
     {
