@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using QuantumStore;
 using QuantumStore.DTOs;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuantumStore
 {
@@ -34,6 +36,16 @@ namespace QuantumStore
         {
             var product = _productRepository.GetProductById(id);
             return product != null ? _mapper.Map<ProductDTO>(product) : null;
+        }
+        public IEnumerable<ProductDTO> GetAllProductss()
+        {
+            var products = _productRepository.GetAllProducts();
+            if (products == null)
+            {
+                return Enumerable.Empty<ProductDTO>();
+            }
+
+            return products.Select(x => _mapper.Map<ProductDTO>(x));
         }
 
         // استرجاع منتج بواسطة الاسم
